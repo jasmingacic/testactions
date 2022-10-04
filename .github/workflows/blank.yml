@@ -19,3 +19,6 @@ jobs:
           kubectl cluster-info
           kubectl create deployment --image nginx my-nginx
           kubectl get po
+      - name: install kusk
+        run: |
+          curl -sSLf https://raw.githubusercontent.com/kubeshop/kusk-gateway/main/cmd/kusk/scripts/install.sh | bash
