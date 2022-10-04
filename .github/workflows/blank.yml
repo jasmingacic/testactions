@@ -22,3 +22,4 @@ jobs:
       - name: install kusk
         run: |
           curl -sSLf https://raw.githubusercontent.com/kubeshop/kusk-gateway/main/cmd/kusk/scripts/install.sh | bash
+          kusk cluster install
