@@ -42,8 +42,8 @@ import (
 
 const (
 	testName         = "test-openapi-path-with-auth"
-	defaultName      = "default"
-	defaultNamespace = "default"
+	defaultNamespace = "kusk-namespace"
+	defaultName      = "kusk-gateway-envoy-fleet"
 )
 
 type OpenAPIPathTestSuite struct {
