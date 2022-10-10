@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../crd
+- ../rbac
+- ../manager
+- ../webhook
+
+# Adds namespace to all resources.
+namespace: kusk-system
+
+# Value of this field is prepended to the
+# names of all resources, e.g. a deployment named
+# "wordpress" becomes "alices-wordpress".
+# Note that it should also match with the prefix (text before '-') of the namespace
+# field above.
+# namePrefix:
+
+# Labels to add to all resources and selectors.
+commonLabels:
+  app.kubernetes.io/instance: kusk-gateway-development
+  app.kubernetes.io/name: kusk-gateway
+
+patchesStrategicMerge:
+- manager_auth_proxy_patch.yaml
+- manager_webhook_patch.yaml
+
+images:
+- name: kusk-gateway
+  newName: kubeshop/kusk-gateway
+  newTag: v1.3.3
+- name: kusk-gateway:dev
+  newName: kubeshop/kusk-gateway
+  newTag: latest

@@ -1,0 +1,14 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kusk-gateway-webhooks-service
+  namespace: system
+  labels:
+    app.kubernetes.io/component: kusk-gateway-webhooks-service
+spec:
+  ports:
+    - port: 443
+      targetPort: webhook-server
+  selector:
+    app.kubernetes.io/component: kusk-gateway-manager

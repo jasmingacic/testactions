@@ -1,0 +1,20 @@
+apiVersion: gateway.kusk.io/v1alpha1
+kind: EnvoyFleet
+metadata:
+  name: kusk-gateway-envoy-fleet
+  namespace: kusk-system
+spec:
+  default: true
+  accesslog:
+    format: text
+  service:
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: http
+      - name: https
+        port: 443
+        protocol: TCP
+        targetPort: http
+    type: LoadBalancer

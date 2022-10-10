@@ -1,0 +1,46 @@
+domain: kusk.io
+layout:
+- go.kubebuilder.io/v3
+projectName: kusk-gateway
+repo: github.com/kubeshop/kusk-gateway
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: kusk.io
+  group: gateway
+  kind: EnvoyFleet
+  path: github.com/kubeshop/kusk-gateway/api/v1alpha1
+  version: v1alpha1
+  webhooks:
+    defaulting: false
+    validation: true
+    webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: kusk.io
+  group: gateway
+  kind: API
+  path: github.com/kubeshop/kusk-gateway/api/v1alpha1
+  version: v1alpha1
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: kusk.io
+  group: gateway
+  kind: StaticRoute
+  path: github.com/kubeshop/kusk-gateway/api/v1alpha1
+  version: v1alpha1
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
+version: "3"

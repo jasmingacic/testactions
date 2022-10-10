@@ -1,26 +1,29 @@
-name: Example action
-
-on: [push]
-
+name: CI
+on:
+  - pull_request
 jobs:
-  build:
+  job1:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    name: build example and deploy to minikube
     steps:
       - uses: actions/checkout@v2
-      - name: install k8s
+      - name: Start minikube
+        uses: medyagh/setup-minikube@master
+      - name: Try the cluster !
+        run: kubectl get pods -A
+      - name: Build image
         run: |
-          curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE=777 INSTALL_K3S_EXEC="server --no-deploy traefik" sh -
-          cat /etc/rancher/k3s/k3s.yaml
-          mkdir -p ~/.kube
-          cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-      - name: example tests
+          export SHELL=/bin/bash
+          eval $(minikube -p minikube docker-env)
+          make docker-build
+          echo -n "verifying images:"
+          docker images
+
+      - name: Deploy to minikube
+        run: kubectl apply -k config/default
+      - name: Test service URLs
         run: |
-          kubectl cluster-info
-          kubectl create deployment --image nginx my-nginx
-          kubectl get po
-      - name: install kusk
-        run: |
-          curl -sSLf https://raw.githubusercontent.com/kubeshop/kusk-gateway/main/cmd/kusk/scripts/install.sh | bash
-          ANALYTICS_ENABLED=false kusk cluster install
-          kubectl get pods -n kusk-system
+          minikube service list
+          minikube service example --url
+          echo "------------------opening the service------------------"
+          curl $(minikube service example --url)

@@ -1,0 +1,34 @@
+# permissions to do manage Envoy Fleets
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kusk-gateway-envoyfleet-manager-role
+rules:
+  - apiGroups:
+      - "apps"
+    resources:
+      - deployments
+      - services
+      - configmaps
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+      - configmaps
+      - namespaces
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch

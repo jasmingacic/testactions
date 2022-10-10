@@ -1,0 +1,18 @@
+apiVersion: gateway.kusk.io/v1alpha1
+kind: StaticRoute
+metadata:
+  name: staticroute-sample
+spec:
+  hosts: [ "*" ]
+  paths:
+    /: 
+       get:
+        route:
+          upstream:
+            host:
+              hostname: httpbin
+              port: 8080
+    /static: 
+       get:
+         redirect:
+           port_redirect: 81
