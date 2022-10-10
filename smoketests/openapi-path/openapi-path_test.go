@@ -42,7 +42,7 @@ import (
 
 const (
 	testName         = "test-openapi-path-with-auth"
-	defaultNamespace = "kusk-namespace"
+	defaultNamespace = "kusk-system"
 	defaultName      = "kusk-gateway-envoy-fleet"
 )
 

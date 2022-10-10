@@ -43,7 +43,7 @@ import (
 
 const (
 	testName         = "test-cache"
-	defaultNamespace = "kusk-namespace"
+	defaultNamespace = "kusk-system"
 	defaultName      = "kusk-gateway-envoy-fleet"
 )
 

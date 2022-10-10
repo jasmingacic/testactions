@@ -45,7 +45,7 @@ import (
 
 const (
 	testName         = "test-auth-oauth2-oauth0-authorization-code-grant"
-	defaultNamespace = "kusk-namespace"
+	defaultNamespace = "kusk-system"
 	defaultName      = "kusk-gateway-envoy-fleet"
 )
 
