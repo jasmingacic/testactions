@@ -19,8 +19,18 @@ jobs:
           echo -n "verifying images:"
           docker images
 
-      - name: Deploy to minikube
-        run: kubectl apply -k config/default
+      # - name: Deploy to minikube
+      #   run: kubectl apply -k config/default
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19
+      - name: build CLI
+        working-directory: cmd/kusk
+        run: |
+          VERSION=latest make build
+          ./kusk cluster install
+          kubectl get pods -n kusk-system
       - name: Test kusk
         run: |
           make check-all
