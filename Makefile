@@ -153,7 +153,6 @@ run: install-deps install-local generate fmt vet ## Run a controller from your h
 .PHONY: docker-build
 docker-build: ## Build docker image with the manager.
 	docker build \
-		--tag ${MANAGER_IMG} \
 		--tag kusk-gateway:latest \
 		--file ./build/manager/Dockerfile \
 		.

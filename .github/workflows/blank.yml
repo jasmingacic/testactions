@@ -21,9 +21,6 @@ jobs:
 
       - name: Deploy to minikube
         run: kubectl apply -k config/default
-      - name: Test service URLs
+      - name: Test kusk
         run: |
-          minikube service list
-          minikube service example --url
-          echo "------------------opening the service------------------"
-          curl $(minikube service example --url)
+          make check-all
