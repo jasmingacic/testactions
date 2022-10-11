@@ -14,7 +14,7 @@ jobs:
       - name: Build image
         run: |
           export SHELL=/bin/bash
-          minikube addons enable ingress --profile kgw
+          minikube addons enable metallb
           eval $(minikube -p minikube docker-env)
           make docker-build
           echo -n "verifying images:"
