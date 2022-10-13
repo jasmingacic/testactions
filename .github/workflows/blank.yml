@@ -14,16 +14,24 @@ jobs:
       - name: Build image
         run: |
           export SHELL=/bin/bash
+          minikube addons enable metallb
           eval $(minikube -p minikube docker-env)
           make docker-build
           echo -n "verifying images:"
           docker images
 
-      - name: Deploy to minikube
-        run: kubectl apply -k config/default
-      - name: Test service URLs
+      # - name: Deploy to minikube
+      #   run: kubectl apply -k config/default
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19
+      - name: build CLI
+        working-directory: cmd/kusk
         run: |
-          minikube service list
-          minikube service example --url
-          echo "------------------opening the service------------------"
-          curl $(minikube service example --url)
+          VERSION=latest make build
+          ./kusk cluster install
+          kubectl get pods -n kusk-system
+      - name: Test kusk
+        run: |
+          make check-all

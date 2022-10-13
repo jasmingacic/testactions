@@ -26,6 +26,7 @@ import (
 	"github.com/kubeshop/kusk-gateway/cmd/kusk/cmd"
 )
 
+
 // `-modtime 1` is a hack to prevent `go-bindata` from generating file modifications times each time it is run and hence causing an update to `cmd/kusk/cmd/manifest_data.go`.
 // We don't want this to happen.
 

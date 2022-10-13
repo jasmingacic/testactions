@@ -16,8 +16,8 @@ import (
 )
 
 const (
-	defaultNamespace = "default"
-	defaultName      = "default"
+	defaultNamespace = "kusk-system"
+	defaultName      = "kusk-gateway-envoy-fleet"
 	testName         = "test"
 	testPort         = 82
 )
